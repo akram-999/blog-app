@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
+const Post = require("../models/Post");
 const { verifyTokenAndAuthorization, verifyTokenAndAdmin } = require("../jwt");
 
 router.get("/users/", verifyTokenAndAdmin, async (req, res) => {
@@ -13,10 +14,11 @@ router.get("/users/", verifyTokenAndAdmin, async (req, res) => {
     }
 });
 
-router.get("/:id", verifyTokenAndAdmin, async (req, res) => {
+router.get("/:id", async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
-        res.status(200).json(user);
+        const { password, ...others } = user._doc;
+        res.status(200).json(others);
     } catch (error) {
         res.status(500).json(error);
     }
@@ -45,8 +47,19 @@ router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
 
 router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
     try {
+        // Get the user first to get their email
+        const user = await User.findById(req.params.id);
+        if (!user) {
+            return res.status(404).json("User not found");
+        }
+
+        // Delete all posts by this user
+        await Post.deleteMany({ email: user.email });
+       
+        // Delete the user
         await User.findByIdAndDelete(req.params.id);
-        res.status(200).json("User has been deleted...");
+        
+        res.status(200).json("User and all their posts have been deleted...");
     } catch (error) {
         res.status(500).json(error);
     }
