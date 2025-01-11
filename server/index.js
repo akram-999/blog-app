@@ -5,7 +5,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const authRoute = require("./routes/auth");
-// const postRoute = require("./routes/posts");
+const postRoute = require("./routes/posts");
 // const categoryRoute = require("./routes/categories");
 const userRoute = require("./routes/users");
 const port = process.env.PORT || 5000;
@@ -26,3 +26,4 @@ app.listen(port, () => {
 
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
+app.use("/api/posts", postRoute);

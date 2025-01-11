@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const Post = require("./models/Post");
 
 const verifyToken = (req, res, next) => {
     const authHeader = req.headers.token;
@@ -39,8 +40,34 @@ const verifyTokenAndAdmin = (req, res, next) => {
     });
 };
 
+const verifyTokenAndPostAuthorization = (req, res, next) => {
+    verifyToken(req, res, async () => {
+        try {
+            if (!req.user) {
+                return res.status(403).json("Authentication failed!");
+            }
+            
+            const post = await Post.findById(req.params.id);
+            if (!post) {
+                return res.status(404).json("Post not found!");
+            }
+
+            // Check if the logged-in user is the post owner or an admin
+            if (post.email === req.user.email || req.user.isAdmin) {
+                req.post = post; // Store post for later use if needed
+                next();
+            } else {
+                res.status(403).json("You can only modify your own posts!");
+            }
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    });
+};
+
 module.exports = {
     verifyToken,
     verifyTokenAndAuthorization,
-    verifyTokenAndAdmin
+    verifyTokenAndAdmin,
+    verifyTokenAndPostAuthorization,
 };
