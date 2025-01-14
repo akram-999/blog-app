@@ -3,7 +3,7 @@ import React from 'react'
 export default function Hero() {
   return (
   
-    <div class="max-w-[85rem] mx-auto my-10 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-[85rem] mx-auto mt-10 mb-28 px-4 sm:px-6 lg:px-8">
     
       <div class="grid lg:grid-cols-7 lg:gap-x-8 xl:gap-x-12 lg:items-center">
         <div class="lg:col-span-3">

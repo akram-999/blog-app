@@ -1,4 +1,4 @@
-@keyframes cus {
+/* @keyframes cus {
     from {
         opacity: 0;
         transform: translateX(-100px);
@@ -14,7 +14,7 @@
     animation: cus linear;
     animation-timeline: view();
     animation-range: entry 0% cover 40%;
- }
+ } */
 
 
 

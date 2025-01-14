@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom'
 
 export default function Blogs() {
    return (
-    <section>
+    <section className='mt-10'>
        
-            <div >
-                <div>
-                  <ul className='flex items-center justify-around tit'>
+            <div className='mt-10'>
+                <div className='mt-10'>
+                  <ul className='flex items-center justify-around '>
                     <li className='text-white bg-gradient-to-tr from-orange-600  to-orange-300  py-1 px-3 rounded-full'>Sport</li>
                     <li className='text-white bg-gradient-to-tr from-orange-600  to-orange-300  py-1 px-3 rounded-full'>Cinema</li>
                     <li className='text-white bg-gradient-to-tr from-orange-600  to-orange-300  py-1 px-3 rounded-full'>Music</li>
@@ -18,7 +18,7 @@ export default function Blogs() {
                   </ul>
                 </div>
 
-                <div className='mt-6 mx-9 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8'>
+                <div className='mt-10 mx-9 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8'>
                   {Data.slice(0, 8).map((product) => (
                     <article className="group blog" key={product.id} >
                     <img src={product.image}

@@ -10,12 +10,10 @@ export default function Contact() {
         <div class="container flex flex-col flex-1 px-6 py-12 mx-auto">
             <div class="flex-1 lg:flex lg:items-center lg:-mx-6">
                 <div class="text-white lg:w-1/2 lg:mx-6">
-                    <h1 class="text-2xl font-semibold capitalize lg:text-3xl">Ultimate design solution</h1>
+                    <h1 class="text-2xl font-semibold capitalize lg:text-3xl">Get in Touch with Us</h1>
 
                     <p class="max-w-xl mt-6">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatem quo
-                        aliquid molestiae hic incidunt beatae placeat accusantium! Alias ex quisquam ab tempora. Ratione
-                        autem doloremque ducimus numquam doloribus, error sed.
+                    We’d love to hear from you! Whether you have questions, feedback, or just want to say hello, our team is here to help. Fill out the form below or reach out through our provided contact details, and we’ll get back to you as soon as possible.
                     </p>
 
                    
