@@ -1,13 +1,13 @@
 
 import './App.css';
 import { Routes,Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Contact from './pages/Contact'
-import Login from './pages/Login'
-import Blog from './pages/Blog';
-import Register from './pages/Register'
-import CreateBlog from './pages/CreateBlog';
-import Profil from './pages/Profile';
+import Home from './pages/Home/Home';
+import Contact from './pages/Contact/Contact'
+import Login from './pages/Login/Login'
+import Blog from './pages/BlogDetail/Blog';
+import Register from './pages/Register/Register'
+import CreateBlog from './pages/CreateBlog/CreateBlog';
+import Profil from './pages/Profile/Profile';
 
 function App() {
   return (

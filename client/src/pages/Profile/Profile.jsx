@@ -96,7 +96,7 @@ export default function Profile() {
                                     </g>
                                 </svg>
                             </div>
-                            <span class="text-center text-gray-400 text-xs font-normal leading-4 mb-1">PNG, JPG or PDF, smaller than 15MB</span>
+                            <span class="text-center text-gray-400 text-xs font-normal leading-4 mb-1">PNG, JPG </span>
                             <h6 class="text-center text-gray-900 text-sm font-medium leading-5">Drag and Drop your file here or</h6>
                             <input id="dropzone-file" type="file" class="hidden" />
                         </label>
