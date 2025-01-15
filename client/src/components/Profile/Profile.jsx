@@ -1,81 +1,113 @@
 import React from 'react'
+import { TiUserDelete } from "react-icons/ti";
 
 export default function Profile() {
   return (
-    <div className='flex'>
-    <main class="py-1 w-1/2">
-        <div class="p-2 md:p-4">
-            <div class="w-full px-6 pb-8 mt-8 sm:max-w-xl sm:rounded-lg">
-                <h2 class="pl-6 text-2xl font-bold sm:text-xl">Profile</h2>
+    <>
+    <section class="relative pt-40 pb-24">
+    <img src="https://pagedone.io/asset/uploads/1705473908.png" alt="cover-image" class="w-full absolute top-0 left-0 z-0 h-60 object-cover"/>
+    <div class="w-full max-w-7xl mx-auto px-6 md:px-8">
+        <div class="flex items-center justify-center sm:justify-start relative z-10 mb-5">
+            <img src="https://pagedone.io/asset/uploads/1705471668.png" alt="user-avatar-image"
+                class="border-4 border-solid border-white rounded-full object-cover"/>
+        </div>
+        <div class="flex items-center justify-center flex-col sm:flex-row max-sm:gap-5 sm:justify-between mb-5">
+            <div class="block">
+                <h3 class="font-manrope font-bold text-4xl text-gray-900 mb-1 max-sm:text-center">Emma Smith</h3>
+                <p class="font-normal text-base leading-7 text-gray-500  max-sm:text-center">Engineer at BB Agency Industry <br class="hidden sm:block" />New
+                    York, United States</p>
+            </div>
+            <div class="flex gap-4">
+                <div
+                    class="py-3.5 px-5 block rounded-lg bg-orange-100 items-center shadow-sm shadow-transparent transition-all duration-500 hover:bg-orange-200">
+                    <span class="px-5 font-semibold text-base leading-7 text-orange-500">321</span> <br/>
+                    <span class="px-5 font-semibold text-base leading-7 text-gray-900">Posts</span>
 
-                <div class="grid max-w-2xl mx-auto mt-8">
-                    <div class="flex flex-col items-center space-y-5 sm:flex-row sm:space-y-0">
-
-                        <img class="object-cover w-40 h-40 p-1 rounded-full ring-2 ring-green-300 dark:ring-orange-500"
-                            src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGZhY2V8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
-                            alt="Bordered avatar" />
-
-                        <div class="flex flex-col space-y-5 sm:ml-8">
-                            <input type="file" id='fileInput' style={{display:"none"}}/>
-                            <label 
-                                class="py-3.5 px-7 text-base font-medium text-white focus:outline-none bg-gradient-to-tr from-orange-600  to-orange-300 rounded-lg border  "
-                                htmlFor="fileInput">
-                                Change picture
-                            </label>
-                            <button type="button"
-                                class="py-3.5 px-7 text-base font-medium text-orange-900 focus:outline-none bg-white rounded-lg border border-orange-200 hover:bg-orange-100  ">
-                                Delete picture
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="items-center mt-8 sm:mt-14 text-[#202142]">
-
-                        <div
-                            class="flex flex-col items-center w-full mb-2 space-x-0 space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0 sm:mb-6">
-                            <div class="w-full">
-                                <label for="first_name"
-                                    class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">User
-                                    name</label>
-                                <input type="text" id="first_name"
-                                    class="bg-orange-50 border border-orange-300  text-sm rounded-lg  block w-full p-2.5 "
-                                    placeholder="Your first name" value="Jane" required />
-                            </div>
-
-                            
-
-                        </div>
-
-                        <div class="mb-2 sm:mb-6">
-                            <label for="email"
-                                class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">
-                                email</label>
-                            <input type="email" id="email"
-                                class="bg-orange-50 border border-orange-300  text-sm rounded-lg  block w-full p-2.5 "
-                                placeholder="your.email@mail.com" required />
-                        </div>
-
-                        <div class="mb-2 sm:mb-6">
-                            <label for="profession"
-                                class="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Password</label>
-                            <input type="Password" id="profession"
-                                class="bg-orange-50 border border-orange-300  text-sm rounded-lg  block w-full p-2.5 "
-                                placeholder="your profession" required />
-                        </div>
-
-                        <div class="flex justify-end">
-                            <button type="submit"
-                                class="text-white bg-gradient-to-tr from-green-600  to-green-300  hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Save</button>
-                        </div>
-
-                    </div>
                 </div>
+                <button
+                    class="py-3.5 px-5 block rounded-lg bg-red-500 items-center shadow-sm shadow-transparent transition-all duration-500 hover:bg-red-600">
+                    <TiUserDelete className='text-white size-6'/> <br/>
+                    <span class=" font-semibold text-base leading-7 text-white">Delete account</span>
+
+
+                </button>
             </div>
         </div>
-    </main>
-    <aside className='w-1/2 mt-11'>
-        <img src='./svg2.svg' />
-    </aside>
+        {/* <div class="flex max-sm:flex-wrap max-sm:justify-center items-center gap-4">
+            <a href="javascript:;" class="rounded-full py-3 px-6 bg-stone-100 text-gray-700 font-semibold text-sm leading-6 transition-all duration-500 hover:bg-stone-200 hover:text-gray-900">Ux Research</a>
+            <a href="javascript:;" class="rounded-full py-3 px-6 bg-stone-100 text-gray-700 font-semibold text-sm leading-6 transition-all duration-500 hover:bg-stone-200 hover:text-gray-900">CX Strategy</a>
+            <a href="javascript:;" class="rounded-full py-3 px-6 bg-stone-100 text-gray-700 font-semibold text-sm leading-6 transition-all duration-500 hover:bg-stone-200 hover:text-gray-900">Project Manager</a>
+        </div> */}
     </div>
+</section>
+       
+       
+        <section class="py-24 relative">
+            <div class="w-full max-w-7xl px-4 md:px-5 lg:px-5 mx-auto">
+                <div class="w-full flex-col justify-start items-start lg:gap-14 md:gap-10 gap-8 inline-flex">
+                    <div class="w-full flex-col justify-center items-center gap-4 flex">
+                        <h2 class="text-center text-gray-900 text-4xl font-bold font-manrope leading-normal">Update user form</h2>
+                      </div>
+                    <div class="w-full flex-col justify-start items-start gap-6 flex">
+                        <h4 class="text-gray-900 text-xl font-semibold leading-loose">Personal Details</h4>
+                        <div class="w-full flex-col justify-start items-start gap-8 flex">
+                            <div class="w-full justify-start items-start gap-8 flex sm:flex-row flex-col">
+                                <div class="w-full flex-col justify-start items-start gap-1.5 flex">
+                                    <label for="" class="flex gap-1 items-center text-gray-600 text-base font-medium leading-relaxed">Full Name
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="7" height="7" viewBox="0 0 7 7" fill="none">
+                                            <path d="M3.11222 6.04545L3.20668 3.94744L1.43679 5.08594L0.894886 4.14134L2.77415 3.18182L0.894886 2.2223L1.43679 1.2777L3.20668 2.41619L3.11222 0.318182H4.19105L4.09659 2.41619L5.86648 1.2777L6.40838 2.2223L4.52912 3.18182L6.40838 4.14134L5.86648 5.08594L4.09659 3.94744L4.19105 6.04545H3.11222Z" fill="#EF4444"/>
+                                        </svg>
+                                    </label>
+                                    <input type="text" class="w-full focus:outline-none text-gray-900 placeholder-gray-400 text-lg font-normal leading-relaxed px-5 py-3 rounded-lg shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)] border border-gray-200 justify-start items-center gap-2 inline-flex" placeholder="John"/>
+                                </div>
+                                
+                            </div>
+                            <div class="w-full justify-start items-start gap-8 flex sm:flex-row flex-col">
+                                
+                                <div class="w-full flex-col justify-start items-start gap-1.5 flex">
+                                    <label for="" class="flex gap-1 items-center text-gray-600 text-base font-medium leading-relaxed">Email
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="7" height="7" viewBox="0 0 7 7" fill="none">
+                                            <path d="M3.11222 6.04545L3.20668 3.94744L1.43679 5.08594L0.894886 4.14134L2.77415 3.18182L0.894886 2.2223L1.43679 1.2777L3.20668 2.41619L3.11222 0.318182H4.19105L4.09659 2.41619L5.86648 1.2777L6.40838 2.2223L4.52912 3.18182L6.40838 4.14134L5.86648 5.08594L4.09659 3.94744L4.19105 6.04545H3.11222Z" fill="#EF4444"/>
+                                        </svg>
+                                    </label>
+                                    <input type="text" class="w-full focus:outline-none text-gray-900 placeholder-gray-400 text-lg font-normal leading-relaxed px-5 py-3 rounded-lg shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)] border border-gray-200 justify-start items-center gap-2 inline-flex" placeholder="Johnsmith@gmail.com"/>
+                                </div>
+                            </div>
+                            <div class="w-full justify-start items-start gap-8 flex sm:flex-row flex-col">
+                                <div class="w-full flex-col justify-start items-start gap-1.5 flex">
+                                    <label for="" class="flex gap-1 items-center text-gray-600 text-base font-medium leading-relaxed">Password
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="7" height="7" viewBox="0 0 7 7" fill="none">
+                                            <path d="M3.11222 6.04545L3.20668 3.94744L1.43679 5.08594L0.894886 4.14134L2.77415 3.18182L0.894886 2.2223L1.43679 1.2777L3.20668 2.41619L3.11222 0.318182H4.19105L4.09659 2.41619L5.86648 1.2777L6.40838 2.2223L4.52912 3.18182L6.40838 4.14134L5.86648 5.08594L4.09659 3.94744L4.19105 6.04545H3.11222Z" fill="#EF4444"/>
+                                        </svg>
+                                    </label>
+                                    <input type="password" class="w-full focus:outline-none text-gray-900 placeholder-gray-400 text-lg font-normal leading-relaxed px-5 py-3 rounded-lg shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)] border border-gray-200 justify-start items-center gap-2 inline-flex"  />
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="w-full flex-col justify-start items-start gap-2.5 flex">
+                        <label for="dropzone-file" class="flex flex-col items-center justify-center py-9 w-full border border-gray-300 border-dashed rounded-2xl cursor-pointer bg-gray-50 ">
+                            <div class="mb-3 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                    <g id="Upload 02">
+                                        <path id="icon" d="M16.296 25.3935L19.9997 21.6667L23.7034 25.3935M19.9997 35V21.759M10.7404 27.3611H9.855C6.253 27.3611 3.33301 24.4411 3.33301 20.8391C3.33301 17.2371 6.253 14.3171 9.855 14.3171V14.3171C10.344 14.3171 10.736 13.9195 10.7816 13.4326C11.2243 8.70174 15.1824 5 19.9997 5C25.1134 5 29.2589 9.1714 29.2589 14.3171H30.1444C33.7463 14.3171 36.6663 17.2371 36.6663 20.8391C36.6663 24.4411 33.7463 27.3611 30.1444 27.3611H29.2589" stroke="#4F46E5" stroke-width="1.6" stroke-linecap="round" />
+                                    </g>
+                                </svg>
+                            </div>
+                            <span class="text-center text-gray-400 text-xs font-normal leading-4 mb-1">PNG, JPG or PDF, smaller than 15MB</span>
+                            <h6 class="text-center text-gray-900 text-sm font-medium leading-5">Drag and Drop your file here or</h6>
+                            <input id="dropzone-file" type="file" class="hidden" />
+                        </label>
+                    </div>
+                    <button class="mx-auto sm:w-fit w-full px-9 py-3 bg-blue-500 hover:bg-blue-700 ease-in-out transition-all duration-700 rounded-xl shadow justify-center items-center flex">
+                        <span class="px-3.5 text-center text-white text-lg font-semibold leading-8">Update</span>
+                    </button>
+                </div>
+            </div>
+         </section>
+                                                                                    
+    </>                                 
   )
 }
