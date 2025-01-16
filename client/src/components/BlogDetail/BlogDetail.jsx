@@ -1,5 +1,5 @@
 import React from 'react'
-import { Data } from './Data';
+import { Data } from '../Blogs/Data';
 import { useParams} from 'react-router-dom'
 
 export default function BlogDetail() {
