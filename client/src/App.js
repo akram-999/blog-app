@@ -12,6 +12,7 @@ import Profil from './pages/Profile/Profile';
 function App() {
   return (
         <Routes>
+          
           <Route path='/' element={<Home />} />
            <Route path='/blog/:id' element={<Blog />} />
            <Route path='/contact' element={<Contact />} />
