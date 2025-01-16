@@ -1,7 +1,35 @@
-import React  from 'react'
+import React, { useState , useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { AuthContext } from '../../context/AuthContext';
 import { Link } from 'react-router-dom'
 
 export default function Login() {
+    const API_URL = "http://localhost:5000/api";
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const { login } = useContext(AuthContext);
+
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(`${API_URL}/auth/login`, { email, password });
+       if (res.data.accessToken) {
+                login(res.data.accessToken, res.data.others); // Use the login method
+                alert('Login successful!');
+                localStorage.setItem("accessToken", res.data.accessToken);
+            } else {
+                alert('Login failed: No token returned.');
+            }
+    
+      navigate("/");
+    } catch (err) {
+      setError(err.response?.data || "Something went wrong");
+    }
+  };
   return (
     <section class="relative py-10 bg-gray-900 sm:py-16 lg:py-24">
     <div class="absolute inset-0">
@@ -20,12 +48,14 @@ export default function Login() {
                 </div>
 
 
-                <form action="#" method="POST" class="mt-8">
+                <form form onSubmit={handleSubmit} class="mt-8">
                     <div class="space-y-5">
                         <div>
                             <label for="" class="text-base font-medium text-gray-900"> Email address </label>
                             <div class="mt-2.5">
-                                <input type="email" name="" id="" placeholder="Enter email to get started" class="block w-full p-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600" />
+                                <input type="email" name="email"
+                                        value={email}
+                                         onChange={(e) => setEmail(e.target.value)} placeholder="Enter email to get started" class="block w-full p-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600" />
                             </div>
                         </div>
 
@@ -35,9 +65,13 @@ export default function Login() {
 
                                </div>
                             <div class="mt-2.5">
-                                <input type="password" name="" id="" placeholder="Enter your password" class="block w-full p-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600" />
+                                <input type="password" name="password"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)} placeholder="Enter your password" class="block w-full p-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600" />
                             </div>
                         </div>
+
+                        {error && <p className="text-red-500">{error}</p>}
 
                         <div>
                             <button type="submit" class="inline-flex items-center justify-center w-full px-4 py-4 text-base font-semibold text-white transition-all duration-200 bg-blue-400 border border-transparent rounded-md focus:outline-none hover:bg-blue-500 focus:bg-blue-700">Log in</button>

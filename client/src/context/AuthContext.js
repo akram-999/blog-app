@@ -14,9 +14,7 @@ export const AuthProvider = ({ children }) => {
 
     // Function to update accessToken
     const login = (token, userData) => {
-        // localStorage.setItem('accessToken', token);
-        // setAccessToken(token);
-        // setUser(userData); // Store user details if needed
+        
         localStorage.setItem('accessToken', token);
         localStorage.setItem('user', JSON.stringify(userData));
         setAccessToken(token);
@@ -25,9 +23,7 @@ export const AuthProvider = ({ children }) => {
 
     // Function to clear accessToken
     const logout = () => {
-        // localStorage.removeItem('accessToken');
-        // setAccessToken(null);
-        // setUser(null);
+        
         localStorage.removeItem('accessToken');
         localStorage.removeItem('user');
         setAccessToken(null);
