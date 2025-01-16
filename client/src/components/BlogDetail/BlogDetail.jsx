@@ -1,11 +1,18 @@
-import React from 'react'
-import { Data } from '../Blogs/Data';
-import { useParams} from 'react-router-dom'
-
+import React, {useEffect, useState} from 'react'
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 export default function BlogDetail() {
   const {id} = useParams();
-  const blog = Data.find((p)=>p.id===parseInt(id));
-  
+  const API_URL = "http://localhost:5000/api/posts";
+  const [blog, setBlog] = useState([]);
+  useEffect(() => {
+    const fetchBlog = async () => {
+      const res = await axios.get(`${API_URL}/${id}`);
+      setBlog(res.data);
+    };
+    fetchBlog();
+  }, []);
+  console.log(blog);
   return (
     <div class="max-w-3xl px-4 pt-6 lg:pt-10 pb-12 sm:px-6 lg:px-8 mx-auto">
   <div class="max-w-2xl">
@@ -21,7 +28,7 @@ export default function BlogDetail() {
               <div class="hs-tooltip [--trigger:hover] [--placement:bottom] inline-block">
                 
                   <span class="font-semibold text-gray-800 dark:text-neutral-200">
-                    {blog.author}
+                    {blog.email}
                   </span>
                 
               </div>
@@ -63,13 +70,11 @@ export default function BlogDetail() {
         
       </div>
 
-      <p class="text-lg text-gray-800 dark:text-neutral-200">{blog.description}</p>
+      <p class="text-lg text-gray-800 dark:text-neutral-200">{blog.desc}</p>
 
       <figure>
-        <img class="w-full object-cover rounded-xl" src={`${blog.image}`} alt="Blog Image" />
-        <figcaption class="mt-3 text-sm text-center text-gray-500 dark:text-neutral-500">
-          A woman sitting at a table.
-        </figcaption>
+        <img class="w-full object-cover rounded-xl" src={`${blog.phpto}`} alt="Blog Image" />
+        
       </figure>
     </div>
     </div>
