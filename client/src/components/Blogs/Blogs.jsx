@@ -7,6 +7,7 @@ import { useState, useEffect } from 'react';
 export default function Blogs({blogs}) {
   const API_URL = "http://localhost:5000/api/categories";
   const [categories, setCategories] = useState([]);
+
   useEffect(() => {
     const fetchCategories = async () => {
       const res = await axios.get(`${API_URL}`);
@@ -14,13 +15,15 @@ export default function Blogs({blogs}) {
     };
     fetchCategories();
   }, []);
+
   const [selectedCategory, setSelectedCategory] = useState('All');
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
   };
+
   const filteredBlogs = selectedCategory === 'All' 
     ? blogs 
-    : blogs.filter(blog => blog.categories.some(category => category.name === selectedCategory));
+    : blogs.filter(blog => blog.categories.some(category => category === selectedCategory));
 
   
   
@@ -56,11 +59,16 @@ export default function Blogs({blogs}) {
                     />
 
                     <div className="p-4">
+
+                    <div className='flex flex-wrap gap-2'>
                       {product.categories.map((category) => (
-                        <p className="mt-2 line-clamp-3 text-sm/relaxed text-green-400">
-                        {category.name}
+                        <p className="mt-2  line-clamp-3 text-sm/relaxed text-green-400" key={category._id}>
+                        {category}
                         </p>
                       ))}
+                    </div>
+                      
+
                       <Link to={`/blog/${product._id}`}>
                         <h3 className="text-lg font-medium text-gray-900 hover:text-orange-400">{product.title}</h3>
                       </Link>

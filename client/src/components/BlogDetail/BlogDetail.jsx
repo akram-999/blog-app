@@ -107,9 +107,14 @@ export default function BlogDetail() {
         
         <div className="space-y-5 md:space-y-8">
           <div className="space-y-3">
-            <p className="text-lg text-green-400 ">{blog.category}</p>
+            
             <h2 className="text-2xl font-bold md:text-3xl dark:text-white">{blog.title}</h2>
-
+            
+            <div className='flex flex-wrap gap-2'>
+            {blog.categories.map((category) => (
+              <p className="text-lg text-green-400 ">{category}</p>
+            ))}
+            </div>
             
           </div>
 

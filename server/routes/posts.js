@@ -28,7 +28,7 @@ router.get("/", async (req, res) => {
                 $in: [querycategory]
             }});
         }else{
-            posts = await Post.find()
+            posts = await Post.find().populate('categories').sort({ createdAt: -1 });
         }
         res.status(200).json(posts);
     } catch (error) {
