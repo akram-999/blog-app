@@ -27,6 +27,8 @@ export default function BlogDetail() {
     fetchBlog();
   }, [id]);
 
+  console.log(blog);
+
   // Move handleDelete outside useEffect
   const handleDelete = async () => {
     try {
@@ -51,10 +53,11 @@ export default function BlogDetail() {
       <div className="max-w-2xl">
         <div className="flex justify-between items-center mb-6">
           <div className="flex w-full sm:items-center gap-x-5 sm:gap-x-3">
+            <Link to={`/profile/${blog.userId._id}`}>
             <div className="shrink-0">
               <img className="size-12 rounded-full" src="https://images.unsplash.com/photo-1669837401587-f9a4cfe3126e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80" alt="Avatar" />
             </div>
-
+            </Link>
             <div className="grow">
               <div className="flex justify-between items-center gap-x-2">
                 <div>
@@ -68,17 +71,17 @@ export default function BlogDetail() {
                 
                   <ul className="text-xs text-gray-500 dark:text-neutral-500">
                     <li className="inline-block relative pe-6 last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-2 before:-translate-y-1/2 before:size-1 before:bg-gray-300 before:rounded-full dark:text-neutral-400 dark:before:bg-neutral-600">
-                      Jan 18
+                      {new Date(blog.createdAt).toLocaleDateString()}
                     </li>
                     <li className="inline-block relative pe-6 last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-2 before:-translate-y-1/2 before:size-1 before:bg-gray-300 before:rounded-full dark:text-neutral-400 dark:before:bg-neutral-600">
-                      8 min read
+                      {Math.ceil((new Date() - new Date(blog.createdAt)) / 3600000)} hours ago
                     </li>
                   </ul>
                 </div>  
               </div>
             </div>
             
-            {blog.userId === user?._id && (
+            {blog.userId._id === user?._id && (
             <div className="flex justify-around items-center py-3">
               <div className="flex gap-2 mx-3 text-gray-600 hover:scale-110 duration-200 hover:cursor-pointer">
                   <svg className="w-6 stroke-green-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -109,7 +112,7 @@ export default function BlogDetail() {
           <div className="space-y-3">
             
             <h2 className="text-2xl font-bold md:text-3xl dark:text-white">{blog.title}</h2>
-            
+
             <div className='flex flex-wrap gap-2'>
             {blog.categories.map((category) => (
               <p className="text-lg text-green-400 ">{category}</p>

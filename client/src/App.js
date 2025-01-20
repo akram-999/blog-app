@@ -18,9 +18,9 @@ function App() {
            <Route path='/contact' element={<Contact />} />
            <Route path='/login' element={<Login />} />
            <Route path='/register' element={<Register />} />
-           <Route path='/profile' element={<Profil />} />
+           <Route path='/profile/:id' element={<Profil />} />
            <Route path='/createblog' element={<CreateBlog />} />
-           <Route path='/update-user' element={<UpdateUser />} />
+           <Route path='/update-user/:id' element={<UpdateUser />} />
         </Routes>
   );
 }

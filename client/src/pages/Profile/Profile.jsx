@@ -6,25 +6,34 @@ import { AuthContext } from '../../context/AuthContext';
 import { useState } from 'react';
 import axios from 'axios';
 import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 export default function Profile() {
+    const {id} = useParams();
     const {user} = useContext(AuthContext);
     console.log(user);
-    const API_URL = "http://localhost:5000/api/posts";
+    const API_URL = "http://localhost:5000/api/users";
+    const API_URL_POSTS = "http://localhost:5000/api/posts";
 
-    const [posts,setPosts] = useState([]);
+    const [userProfile,setUserProfile] = useState([]);
+    const [postsUser,setPostsUser] = useState([]);
 
     useEffect(()=>{
         
-        const fetchPosts = async()=>{
-            const res = await axios.get(`${API_URL}/user/${user?._id}`);
-            console.log(res.data);
-            setPosts(res.data);
-        }
-        fetchPosts();
-    },[user?._id]);
+        const fetchUser = async()=>{
 
-    console.log(posts);
+
+            const res = await axios.get(`${API_URL}/${id}`);
+            console.log(res.data);
+            setUserProfile(res.data);
+            const resPosts = await axios.get(`${API_URL_POSTS}/user/${id}`);
+            setPostsUser(resPosts.data);
+
+        }
+        fetchUser();
+    },[id]);
+
+    console.log(userProfile);
 
   return (
     <>
@@ -37,18 +46,20 @@ export default function Profile() {
         </div>
         <div class="flex items-center justify-center flex-col sm:flex-row max-sm:gap-5 sm:justify-between mb-5">
             <div class="block">
-                <h3 class="font-manrope font-bold text-4xl text-gray-900 mb-1 max-sm:text-center">{user.username}</h3>
+                <h3 class="font-manrope font-bold text-4xl text-gray-900 mb-1 max-sm:text-center">{userProfile.username}</h3>
                 <p class="font-normal text-base leading-7 text-gray-500  max-sm:text-center">Engineer at BB Agency Industry <br class="hidden sm:block" />New
                     York, United States</p>
             </div>
+
+            {userProfile._id === user?._id && (
             <div class="flex gap-4">
                 <div
                     class="py-3.5 px-5 block rounded-lg bg-orange-100 items-center shadow-sm shadow-transparent transition-all duration-500 hover:bg-orange-200">
-                    <span class="px-5 font-semibold text-base leading-7 text-orange-500">{posts.length}</span> <br/>
+                    <span class="px-5 font-semibold text-base leading-7 text-orange-500">{postsUser.length}</span> <br/>
                     <span class="px-5 font-semibold text-base leading-7 text-gray-900">Posts</span>
 
                 </div>
-                <Link to='/update-user'>
+                <Link to={`/update-user/${userProfile._id}`}>
                 <button
                     class="py-3.5 px-5 block rounded-lg bg-green-500 items-center shadow-sm shadow-transparent transition-all duration-500 hover:bg-green-600">
                     <TiUserDelete className='text-white size-6'/> <br/>
@@ -65,6 +76,7 @@ export default function Profile() {
 
                 </button>
             </div>
+            )}
         </div>
         {/* <div class="flex max-sm:flex-wrap max-sm:justify-center items-center gap-4">
             <a href="javascript:;" class="rounded-full py-3 px-6 bg-stone-100 text-gray-700 font-semibold text-sm leading-6 transition-all duration-500 hover:bg-stone-200 hover:text-gray-900">Ux Research</a>
@@ -78,7 +90,7 @@ export default function Profile() {
 
        
                 <div className='mt-10 mx-9 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8'>
-                  {posts.slice(0, 8).map((product) => (
+                  {postsUser.slice(0, 8).map((product) => (
                     <article className="group blog" key={product.id} >
                     <img src={product.photo}
                       className="h-56 w-full rounded-xl object-cover shadow-xl transition group-hover:grayscale-[50%]"
