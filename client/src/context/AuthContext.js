@@ -1,48 +1,69 @@
 // src/context/AuthContext.js
-import React, { createContext, useState , useEffect } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
+import axios from 'axios';
 
 // Create Context
 export const AuthContext = createContext();
 
 // Create Provider
 export const AuthProvider = ({ children }) => {
-    const [accessToken, setAccessToken] = useState(localStorage.getItem('accessToken') || null);
     const [user, setUser] = useState(() => {
-        const storedUser = localStorage.getItem('user');
-        return storedUser ? JSON.parse(storedUser) : null;
-    }); // Optional, to manage user details
+        // Get stored user data from localStorage during initialization
+        const savedUser = localStorage.getItem('user');
+        console.log('Stored user:', savedUser); // Debug log
+        try {
+            return savedUser ? JSON.parse(savedUser) : null;
+        } catch (error) {
+            console.error('Error parsing user:', error);
+            localStorage.removeItem('user'); // Clear invalid data
+            return null;
+        }
+    });
 
-    // Function to update accessToken
-    const login = (token, userData) => {
-        
-        localStorage.setItem('accessToken', token);
-        localStorage.setItem('user', JSON.stringify(userData));
-        setAccessToken(token);
-        setUser(userData);
-    };
+    const [token, setToken] = useState(() => {
+        // Get stored token from localStorage during initialization
+        const savedToken = localStorage.getItem('token');
+        console.log('Stored token:', savedToken); // Debug log
+        return savedToken || null;
+    });
 
-    // Function to clear accessToken
-    const logout = () => {
-        
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('user');
-        setAccessToken(null);
-        setUser(null);
-    };
-
+    // Update localStorage when user or token changes
+    useEffect(() => {
+        if (user) {
+            localStorage.setItem('user', JSON.stringify(user));
+        } else {
+            localStorage.removeItem('user');
+        }
+    }, [user]);
 
     useEffect(() => {
-        // Optional: Sync with localStorage if needed on component mount
-        const token = localStorage.getItem('accessToken');
-        const storedUser = localStorage.getItem('user');
-        if (token && storedUser) {
-            setAccessToken(token);
-            setUser(JSON.parse(storedUser));
+        if (token) {
+            localStorage.setItem('token', token);
+            // Set axios default header
+            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        } else {
+            localStorage.removeItem('token');
+            delete axios.defaults.headers.common['Authorization'];
         }
-    }, []);
-    
+    }, [token]);
+
+    const login = (userData, accessToken) => {
+        console.log('Login with:', { userData, accessToken }); // Debug log
+        if (!userData || !accessToken) {
+            console.error('Invalid login data:', { userData, accessToken });
+            return;
+        }
+        setUser(userData);
+        setToken(accessToken);
+    };
+
+    const logout = () => {
+        setUser(null);
+        setToken(null);
+    };
+
     return (
-        <AuthContext.Provider value={{ accessToken, user, login, logout }}>
+        <AuthContext.Provider value={{ user, token, login, logout }}>
             {children}
         </AuthContext.Provider>
     );

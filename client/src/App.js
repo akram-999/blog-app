@@ -8,7 +8,7 @@ import Blog from './pages/BlogDetail/Blog';
 import Register from './pages/Register/Register'
 import CreateBlog from './pages/CreateBlog/CreateBlog';
 import Profil from './pages/Profile/Profile';
-
+import UpdateUser from './pages/UpdateUser/UpdateUser';
 function App() {
   return (
         <Routes>
@@ -20,6 +20,7 @@ function App() {
            <Route path='/register' element={<Register />} />
            <Route path='/profile' element={<Profil />} />
            <Route path='/createblog' element={<CreateBlog />} />
+           <Route path='/update-user' element={<UpdateUser />} />
         </Routes>
   );
 }

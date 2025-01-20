@@ -36,6 +36,23 @@ router.get("/", async (req, res) => {
     }
 });
 
+router.get("/user/:id", async (req, res) => {
+    try {
+        console.log("Fetching posts for user ID:", req.params.id);
+        
+        const posts = await Post.find({ userId: req.params.id })
+            .populate('categories')
+            .sort({ createdAt: -1 });
+            
+        console.log("Found posts:", posts.length);
+        
+        res.status(200).json(posts);
+    } catch (error) {
+        console.error("Error fetching posts:", error);
+        res.status(500).json({ message: "Failed to fetch posts", error: error.message });
+    }
+});
+
 router.get("/:id", async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);

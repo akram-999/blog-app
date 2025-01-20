@@ -5,7 +5,7 @@ import { AuthContext } from '../../context/AuthContext';
 import { Link } from 'react-router-dom'
 
 export default function Login() {
-    const API_URL = "http://localhost:5000/api";
+    const API_URL = "http://localhost:5000/api/auth";
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const { login } = useContext(AuthContext);
@@ -16,18 +16,26 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${API_URL}/auth/login`, { email, password });
-       if (res.data.accessToken) {
-                login(res.data.accessToken, res.data.others); // Use the login method
-                alert('Login successful!');
-                localStorage.setItem("accessToken", res.data.accessToken);
-            } else {
-                alert('Login failed: No token returned.');
-            }
-    
-      navigate("/");
+      const res = await axios.post(`${API_URL}/login`, {
+        email: email,
+        password: password,
+      });
+      
+      console.log('Login response:', res.data);
+      
+      // The server sends { others, accessToken }
+      const userData = res.data.others;
+      const token = res.data.accessToken;
+
+      if (!userData || !token) {
+        throw new Error('Invalid response data');
+      }
+
+      login(userData, token);
+      navigate('/');
     } catch (err) {
-      setError(err.response?.data || "Something went wrong");
+      console.error('Login error:', err);
+      setError(err.response?.data?.message || 'Login failed');
     }
   };
   return (
@@ -43,7 +51,7 @@ export default function Login() {
                 <div class="text-center">
                     <h2 class="text-3xl font-bold text-gray-900">Welcome back</h2>
                     
-                    <p class="mt-2 text-base text-gray-600">Don’t have one? <Link to='/register' title="" class="text-orange-400 transition-all duration-200 hover:underline hover:text-orange-500">Create a free account</Link></p>
+                    <p class="mt-2 text-base text-gray-600">Don't have one? <Link to='/register' title="" class="text-orange-400 transition-all duration-200 hover:underline hover:text-orange-500">Create a free account</Link></p>
                     
                 </div>
 
