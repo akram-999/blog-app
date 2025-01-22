@@ -1,6 +1,33 @@
 import React from 'react'
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
+import { useState } from 'react';
+import axios from 'axios';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+
 
 export default function UpdateUser() {
+    const {id} = useParams();
+    const {user} = useContext(AuthContext);
+    console.log(user);
+    const API_URL = "http://localhost:5000/api/users";
+
+    // const [userUpdate,setUserUpdate] = useState([]);
+
+    // useEffect(()=>{
+        
+    //     const fetchUser = async()=>{
+
+
+    //         const res = await axios.put(`${API_URL}/${id}`);
+    //         console.log(res.data);
+    //         setUserUpdate(res.data);
+            
+
+    //     }
+    //     fetchUser();
+    // },[id]);
   return (
     <section class="py-24 relative">
             <div class="w-full max-w-7xl px-4 md:px-5 lg:px-5 mx-auto">
@@ -18,7 +45,7 @@ export default function UpdateUser() {
                                             <path d="M3.11222 6.04545L3.20668 3.94744L1.43679 5.08594L0.894886 4.14134L2.77415 3.18182L0.894886 2.2223L1.43679 1.2777L3.20668 2.41619L3.11222 0.318182H4.19105L4.09659 2.41619L5.86648 1.2777L6.40838 2.2223L4.52912 3.18182L6.40838 4.14134L5.86648 5.08594L4.09659 3.94744L4.19105 6.04545H3.11222Z" fill="#EF4444"/>
                                         </svg>
                                     </label>
-                                    <input type="text" class="w-full focus:outline-none text-gray-900 placeholder-gray-400 text-lg font-normal leading-relaxed px-5 py-3 rounded-lg shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)] border border-gray-200 justify-start items-center gap-2 inline-flex" placeholder="John"/>
+                                    <input type="text" class="w-full focus:outline-none text-gray-900 placeholder-gray-400 text-lg font-normal leading-relaxed px-5 py-3 rounded-lg shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)] border border-gray-200 justify-start items-center gap-2 inline-flex"  value={user.username}/>
                                 </div>
                                 
                             </div>
@@ -30,7 +57,7 @@ export default function UpdateUser() {
                                             <path d="M3.11222 6.04545L3.20668 3.94744L1.43679 5.08594L0.894886 4.14134L2.77415 3.18182L0.894886 2.2223L1.43679 1.2777L3.20668 2.41619L3.11222 0.318182H4.19105L4.09659 2.41619L5.86648 1.2777L6.40838 2.2223L4.52912 3.18182L6.40838 4.14134L5.86648 5.08594L4.09659 3.94744L4.19105 6.04545H3.11222Z" fill="#EF4444"/>
                                         </svg>
                                     </label>
-                                    <input type="text" class="w-full focus:outline-none text-gray-900 placeholder-gray-400 text-lg font-normal leading-relaxed px-5 py-3 rounded-lg shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)] border border-gray-200 justify-start items-center gap-2 inline-flex" placeholder="Johnsmith@gmail.com"/>
+                                    <input type="text" class="w-full focus:outline-none text-gray-900 placeholder-gray-400 text-lg font-normal leading-relaxed px-5 py-3 rounded-lg shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)] border border-gray-200 justify-start items-center gap-2 inline-flex" value={user.email}/>
                                 </div>
                             </div>
                             <div class="w-full justify-start items-start gap-8 flex sm:flex-row flex-col">
@@ -40,7 +67,7 @@ export default function UpdateUser() {
                                             <path d="M3.11222 6.04545L3.20668 3.94744L1.43679 5.08594L0.894886 4.14134L2.77415 3.18182L0.894886 2.2223L1.43679 1.2777L3.20668 2.41619L3.11222 0.318182H4.19105L4.09659 2.41619L5.86648 1.2777L6.40838 2.2223L4.52912 3.18182L6.40838 4.14134L5.86648 5.08594L4.09659 3.94744L4.19105 6.04545H3.11222Z" fill="#EF4444"/>
                                         </svg>
                                     </label>
-                                    <input type="password" class="w-full focus:outline-none text-gray-900 placeholder-gray-400 text-lg font-normal leading-relaxed px-5 py-3 rounded-lg shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)] border border-gray-200 justify-start items-center gap-2 inline-flex"  />
+                                    <input type="password" class="w-full focus:outline-none text-gray-900 placeholder-gray-400 text-lg font-normal leading-relaxed px-5 py-3 rounded-lg shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)] border border-gray-200 justify-start items-center gap-2 inline-flex"  value={user.password}/>
                                 </div>
                                 
                             </div>
