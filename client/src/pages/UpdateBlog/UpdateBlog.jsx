@@ -1,9 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-export default function CreatePost() {
+export default function UpdateBlog() {
+    const { id } = useParams();
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
     
@@ -15,6 +16,24 @@ export default function CreatePost() {
     const [file, setFile] = useState(null);
     const [error, setError] = useState('');
 
+    // Fetch existing post data
+    useEffect(() => {
+        const fetchPost = async () => {
+            try {
+                const res = await axios.get(`http://localhost:5000/api/posts/${id}`);
+                setPost({
+                    title: res.data.title,
+                    desc: res.data.desc,
+                    categories: res.data.categories || [],
+                });
+            } catch (err) {
+                console.error('Error fetching post:', err);
+                setError('Failed to fetch post data');
+            }
+        };
+        fetchPost();
+    }, [id]);
+
     const handleChange = (e) => {
         setPost({
             ...post,
@@ -24,10 +43,10 @@ export default function CreatePost() {
 
     const handleCategoryChange = (e) => {
         const categories = e.target.value.split(',').map(cat => cat.trim());
-        setPost({
-            ...post,
+        setPost(prev => ({
+            ...prev,
             categories
-        });
+        }));
     };
 
     const handleSubmit = async (e) => {
@@ -35,6 +54,7 @@ export default function CreatePost() {
         try {
             let photoUrl = '';
             
+            // Handle new image upload
             if (file) {
                 const formData = new FormData();
                 const filename = Date.now() + file.name;
@@ -51,7 +71,13 @@ export default function CreatePost() {
                 }
             }
 
-            const newPost = {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                setError('Authentication required');
+                return;
+            }
+
+            const updatedPost = {
                 userId: user._id,
                 title: post.title,
                 desc: post.desc,
@@ -59,22 +85,23 @@ export default function CreatePost() {
                 ...(photoUrl && { photo: photoUrl })
             };
 
-            const res = await axios.post('http://localhost:5000/api/posts', newPost, {
+            await axios.put(`http://localhost:5000/api/posts/${id}`, updatedPost, {
                 headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 }
             });
 
-            navigate(`/profile/${user._id}`);
+            navigate(`/blog/${id}`);
         } catch (err) {
-            console.error('Error creating post:', err);
-            setError(err.response?.data?.message || 'Error creating post');
+            console.error('Error updating post:', err);
+            setError(err.response?.data?.message || 'Error updating post');
         }
     };
 
     return (
         <div className="py-8 px-4 md:px-8 max-w-4xl mx-auto">
-            <h1 className="text-3xl font-bold mb-8">Create New Blog Post</h1>
+            <h1 className="text-3xl font-bold mb-8">Update Blog Post</h1>
             
             {error && (
                 <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
@@ -146,7 +173,7 @@ export default function CreatePost() {
                     type="submit"
                     className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 transition-colors"
                 >
-                    Publish Post
+                    Update Post
                 </button>
             </form>
         </div>

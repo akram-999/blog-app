@@ -53,7 +53,7 @@ export default function Blogs({blogs}) {
                 <div className='mt-10 mx-9 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8'>
                   {filteredBlogs.slice(0, 8).map((product) => (
                     <article className="group blog" key={product.id} >
-                    <img src={product.photo}
+                    <img src={product.photo ? `http://localhost:5000/images/${product.photo}` : "default-avatar.png"}
                       className="h-56 w-full rounded-xl object-cover shadow-xl transition group-hover:grayscale-[50%]"
                       alt='blog'
                     />
