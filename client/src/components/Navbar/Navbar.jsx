@@ -38,7 +38,7 @@ export default function Navbar() {
                   <span className="sr-only">Open user menu</span>
                   <img
                     alt=""
-                    src={user.profilePic}
+                    src={user.profilePic ? `http://localhost:5000/images/${user.profilePic}` : "default-avatar.png"} 
                     className="h-8 w-8 rounded-full"
                   />
                 </MenuButton>
@@ -49,7 +49,7 @@ export default function Navbar() {
               >
                 <MenuItem>
                 
-                  <Link to="/profile" className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
+                  <Link to={`/profile/${user._id}`} className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
                     Profile
                   </Link>
                 </MenuItem>
@@ -69,7 +69,7 @@ export default function Navbar() {
                 )}
                
                 <MenuItem>
-                  <p className="block px-4 py-2 text-sm text-red-500 data-[focus]:bg-gray-100" onClick={handleLogout}>Sign out</p>
+                  <p className="block px-4 py-2 text-sm text-red-500 data-[focus]:bg-gray-100 cursor-pointer" onClick={handleLogout}>Sign out</p>
                   
                 </MenuItem>
               </MenuItems>

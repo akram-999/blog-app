@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const Post = require("./models/Post");
 
 const verifyToken = (req, res, next) => {
-    const authHeader = req.headers.token;
+    const authHeader = req.headers.authorization;
     if (!authHeader) {
         return res.status(401).json("You are not authenticated!");
     }

@@ -26,18 +26,35 @@ router.get("/:id", async (req, res) => {
 
 
 router.put("/:id", verifyTokenAndAuthorization, async (req, res) => {
-    if (req.body.password) {
-        const salt = await bcrypt.genSalt(10);
-        req.body.password = await bcrypt.hash(req.body.password, salt);
-    }
-    
     try {
-        const updatedUser = await User.findByIdAndUpdate(req.params.id, {
-            $set: req.body,
-        }, { new: true });
-        res.status(200).json(updatedUser);
+        // Debug logs
+        console.log('Update request for user:', req.params.id);
+        console.log('Update data:', req.body);
+        console.log('Authenticated user:', req.user);
+
+        if (req.body.password) {
+            const salt = await bcrypt.genSalt(10);
+            req.body.password = await bcrypt.hash(req.body.password, salt);
+        }
+        
+        const updatedUser = await User.findByIdAndUpdate(
+            req.params.id,
+            {
+                $set: req.body,
+            },
+            { new: true }
+        );
+
+        if (!updatedUser) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        // Remove password from response
+        const { password, ...others } = updatedUser._doc;
+        
+        res.status(200).json(others);
     } catch (error) {
-        console.error('Error updating user:', error);
+        console.error('Server error updating user:', error);
         res.status(500).json({ 
             message: "Error updating user",
             error: error.message

@@ -59,7 +59,7 @@ export default function Login() {
                 <form form onSubmit={handleSubmit} class="mt-8">
                     <div class="space-y-5">
                         <div>
-                            <label for="" class="text-base font-medium text-gray-900"> Email address </label>
+                            <label className="text-base font-medium text-gray-900"> Email address </label>
                             <div class="mt-2.5">
                                 <input type="email" name="email"
                                         value={email}

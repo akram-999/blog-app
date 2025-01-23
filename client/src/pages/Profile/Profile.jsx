@@ -41,8 +41,11 @@ export default function Profile() {
     <img src="https://pagedone.io/asset/uploads/1705473908.png" alt="cover-image" class="w-full absolute top-0 left-0 z-0 h-60 object-cover"/>
     <div class="w-full max-w-7xl mx-auto px-6 md:px-8">
         <div class="flex items-center justify-center sm:justify-start relative z-10 mb-5">
-            <img src="https://pagedone.io/asset/uploads/1705471668.png" alt="user-avatar-image"
-                class="border-4 border-solid border-white rounded-full object-cover"/>
+            <img 
+                src={userProfile.profilePic ? `http://localhost:5000/images/${userProfile.profilePic}` : "default-avatar.png"} 
+                alt="user-avatar-image"
+                className="border-4 border-solid border-white rounded-full object-cover w-32 h-32"
+            />
         </div>
         <div class="flex items-center justify-center flex-col sm:flex-row max-sm:gap-5 sm:justify-between mb-5">
             <div class="block">
