@@ -3,6 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';
 import { Link } from 'react-router-dom';
+import { CiUser } from "react-icons/ci";
+
 
 export default function BlogDetail() {
   const { user } = useContext(AuthContext);
@@ -53,9 +55,9 @@ export default function BlogDetail() {
       <div className="max-w-2xl">
         <div className="flex justify-between items-center mb-6">
           <div className="flex w-full sm:items-center gap-x-5 sm:gap-x-3">
-            <Link to={`/profile/${blog.userId._id}`}>
+            <Link to={`/profile/${blog?.userId?._id}`}>
             <div className="shrink-0">
-              <img className="size-12 rounded-full" src={blog.userId.profilePic ? `http://localhost:5000/images/${blog.userId.profilePic}` : "default-avatar.png"} alt="Avatar" />
+              <img className="size-12 rounded-full" src={blog?.userId?.profilePic ? `http://localhost:5000/images/${blog.userId.profilePic}` : 'https://i.pinimg.com/736x/0d/64/98/0d64989794b1a4c9d89bff571d3d5842.jpg'} alt="Avatar" />
             </div>
             </Link>
             <div className="grow">

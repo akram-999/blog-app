@@ -4,6 +4,8 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { AuthContext } from '../../context/AuthContext';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { CiUser } from "react-icons/ci";
+
 
 export default function Navbar() {
     const navigate = useNavigate();
@@ -38,7 +40,7 @@ export default function Navbar() {
                   <span className="sr-only">Open user menu</span>
                   <img
                     alt=""
-                    src={user.profilePic ? `http://localhost:5000/images/${user.profilePic}` : "default-avatar.png"} 
+                    src={user.profilePic ? `http://localhost:5000/images/${user.profilePic}` : 'https://i.pinimg.com/736x/0d/64/98/0d64989794b1a4c9d89bff571d3d5842.jpg'} 
                     className="h-8 w-8 rounded-full"
                   />
                 </MenuButton>

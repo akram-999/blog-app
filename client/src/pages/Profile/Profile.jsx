@@ -7,6 +7,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { CiUser } from "react-icons/ci";
 
 export default function Profile() {
     const {id} = useParams();
@@ -43,7 +44,7 @@ export default function Profile() {
     <div class="w-full max-w-7xl mx-auto px-6 md:px-8">
         <div class="flex items-center justify-center sm:justify-start relative z-10 mb-5">
             <img 
-                src={userProfile.profilePic ? `http://localhost:5000/images/${userProfile.profilePic}` : "default-avatar.png"} 
+                src={userProfile.profilePic ? `http://localhost:5000/images/${userProfile.profilePic}` : 'https://i.pinimg.com/736x/0d/64/98/0d64989794b1a4c9d89bff571d3d5842.jpg'} 
                 alt="user-avatar-image"
                 className="border-4 border-solid border-white rounded-full object-cover w-32 h-32"
             />
