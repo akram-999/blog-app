@@ -1,11 +1,10 @@
 import React from 'react'
 import './blogs.css'
 import { Link } from 'react-router-dom'
-import axios from 'axios';
-import { useState, useEffect } from 'react';
+
 
 export default function Blogs({blogs}) {
-  const API_URL = "http://localhost:5000/api/categories";
+ 
  
   
   
@@ -27,7 +26,7 @@ export default function Blogs({blogs}) {
 
                     <div className='flex flex-wrap gap-2'>
                       {product.categories.map((category) => (
-                        <p className="mt-2  line-clamp-3 text-sm/relaxed text-green-400" key={category._id}>
+                        <p className="px-2 py-1 text-xs font-medium text-green-600 bg-green-50 rounded-full" key={category._id}>
                         {category}
                         </p>
                       ))}

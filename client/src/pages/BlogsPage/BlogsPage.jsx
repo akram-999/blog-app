@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom'
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { FiFilter, FiGrid, FiTag } from 'react-icons/fi';
+import { FiSidebar } from "react-icons/fi";
+import { MdOutlineSportsBasketball } from "react-icons/md";
+
 
 export default function Blogs({ blogs }) {
   console.log("Received blogs in BlogsPage:", blogs); // Debug log
@@ -41,7 +44,8 @@ export default function Blogs({ blogs }) {
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
             className="mb-6 p-2 hover:bg-gray-100 rounded-full"
           >
-            <FiFilter size={24} />
+            <FiSidebar size={24}/>
+          
           </button>
 
           <div className="space-y-4">
