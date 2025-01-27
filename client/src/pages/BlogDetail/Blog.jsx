@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../../context/AuthContext';
 import { Link } from 'react-router-dom';
-import { CiUser } from "react-icons/ci";
+
 
 
 export default function BlogDetail() {

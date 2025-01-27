@@ -78,7 +78,7 @@ export default function Blogs({blogs}) {
                       </p>
                     </div>
 
-                    <div className="relative flex items-center gap-x-4">
+                    <div className="relative px-3 flex items-center gap-x-4">
                       <Link to={`/profile/${product.userId?._id}`}>
                       <img src={product?.userId?.profilePic ? `http://localhost:5000/images/${product.userId.profilePic}` : 'https://i.pinimg.com/736x/0d/64/98/0d64989794b1a4c9d89bff571d3d5842.jpg'} alt="" class="size-10 rounded-full bg-gray-50"/>
                       </Link>

@@ -1,4 +1,3 @@
-
 import './App.css';
 import { Routes,Route } from 'react-router-dom';
 import Home from './pages/Home/Home';
@@ -10,6 +9,8 @@ import CreateBlog from './pages/CreateBlog/CreateBlog';
 import Profil from './pages/Profile/Profile';
 import UpdateUser from './pages/UpdateUser/UpdateUser';
 import UpdateBlog from './pages/UpdateBlog/UpdateBlog';
+import FetchData from './pages/BlogsPage/fetchdata';
+
 function App() {
   return (
         <Routes>
@@ -23,6 +24,8 @@ function App() {
            <Route path='/createblog' element={<CreateBlog />} />
            <Route path='/update-user/:id' element={<UpdateUser />} />
            <Route path='/update-blog/:id' element={<UpdateBlog />} />
+           <Route path='/blogs' element={<FetchData />} />
+
         </Routes>
   );
 }

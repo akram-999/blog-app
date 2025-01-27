@@ -7,7 +7,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { CiUser } from "react-icons/ci";
+
 
 export default function Profile() {
     const {id} = useParams();

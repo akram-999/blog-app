@@ -4,7 +4,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { AuthContext } from '../../context/AuthContext';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CiUser } from "react-icons/ci";
+
 
 
 export default function Navbar() {
@@ -28,7 +28,7 @@ export default function Navbar() {
         </div>
         <div className='hidden md:flex  space-x-6 items-center'>
             <Link to='/' className='hover:text-orange-600 decoration-transparent'>Home</Link>
-            <Link to='/about' className='hover:text-orange-600 decoration-transparent'>About</Link>
+            <Link to='/blogs' className='hover:text-orange-600 decoration-transparent'>Blogs</Link>
             <Link to='/contact' className='hover:text-orange-600 decoration-transparent '>Contact</Link> 
         </div>
         <div className='flex space-x-6 items-center'>
