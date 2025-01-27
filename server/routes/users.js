@@ -82,7 +82,16 @@ router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
     }
 });
 
-
+router.get("/", async (req, res) => {
+    try {
+        const users = await User.find(); // Using lean() for better performance
+        console.log('Users count:', users.length); // Debug log
+        res.status(200).json(users);
+    } catch (err) {
+        console.error('Error fetching users:', err);
+        res.status(500).json(err);
+    }
+});
 
 module.exports = router;
 

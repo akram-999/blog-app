@@ -64,7 +64,7 @@ export default function Navbar() {
 
                 {user.isAdmin && (
                 <MenuItem>
-                  <Link to="/dashboard" className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
+                  <Link to="/admin" className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
                     Dashboard
                   </Link>
                 </MenuItem>
