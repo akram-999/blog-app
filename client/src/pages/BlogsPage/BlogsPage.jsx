@@ -8,6 +8,7 @@ import { FiSidebar } from "react-icons/fi";
 import { MdOutlineSportsBasketball } from "react-icons/md";
 
 
+
 export default function Blogs({ blogs }) {
   console.log("Received blogs in BlogsPage:", blogs); // Debug log
   const API_URL = "http://localhost:5000/api/categories";
