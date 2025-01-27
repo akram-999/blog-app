@@ -17,6 +17,7 @@ import Posts from './pages/Admin/Posts';
 import Categories from './pages/Admin/Categories';
 import { AuthContext } from './context/AuthContext';
 import { useContext } from 'react';
+import ProtectedAdminRoute from './components/AdminRoute/ProtectedAdminRoute';
 
 function App() {
   const {user} = useContext(AuthContext);
@@ -33,7 +34,14 @@ function App() {
       <Route path='/update-blog/:id' element={<UpdateBlog />} />
       <Route path='/blogs' element={<FetchData />} />
       
-      <Route path="/admin" element={<AdminLayout />}>
+      <Route
+        path="/admin"
+        element={
+          <ProtectedAdminRoute>
+            <AdminLayout />
+          </ProtectedAdminRoute>
+        }
+      >
         <Route index element={<Dashboard />} />
         <Route path="/admin/users" element={<Users />} />
         <Route path="/admin/posts" element={<Posts />} />

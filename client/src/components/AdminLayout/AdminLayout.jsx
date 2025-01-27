@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
-import { Link, Outlet, useLocation } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import { Link, Outlet, useLocation, Navigate } from 'react-router-dom';
 import { FiHome, FiUsers, FiFileText, FiTag, FiMenu, FiX } from 'react-icons/fi';
+import { AuthContext } from '../../context/AuthContext';
 
 export default function AdminLayout() {
   const [isSidebarOpen, setSidebarOpen] = useState(true);
   const location = useLocation();
+  const { user } = useContext(AuthContext);
+
+  // Double-check admin status
+  if (!user || !user.isAdmin) {
+    return <Navigate to="/" replace />;
+  }
 
   const menuItems = [
     { path: '/admin', icon: <FiHome size={20} />, label: 'Dashboard' },
