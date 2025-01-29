@@ -6,16 +6,17 @@ import { AuthContext } from '../../context/AuthContext';
 import { useState } from 'react';
 import axios from 'axios';
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams , useNavigate} from 'react-router-dom';
 
 
 export default function Profile() {
+  const navigate = useNavigate();
     const {id} = useParams();
-    const {user} = useContext(AuthContext);
+    const {user,logout} = useContext(AuthContext);
     console.log(user);
     const API_URL = "http://localhost:5000/api/users";
     const API_URL_POSTS = "http://localhost:5000/api/posts";
-
+    const [error, setError] = useState(null);
     const [userProfile,setUserProfile] = useState([]);
     const [postsUser,setPostsUser] = useState([]);
 
@@ -34,8 +35,25 @@ export default function Profile() {
         fetchUser();
     },[id]);
 
+    const handleDelete = async () => {
+      try {
+        // Add confirmation dialog
+        if (window.confirm("Are you sure you want to delete your account?")) {
+          await axios.delete(`${API_URL}/${id}`);
+          // Redirect to home page after successful deletion
+          logout();
+          navigate('/');
+        }
+      } catch (err) {
+        console.error("Error deleting user:", err);
+        setError(err.response?.data?.message || "Failed to delete user");
+      }
+    };
+
     console.log(userProfile);
     console.log(postsUser);
+
+    if (error) return <div>Error: {error}</div>;
 
   return (
     <>
@@ -52,8 +70,8 @@ export default function Profile() {
         <div class="flex items-center justify-center flex-col sm:flex-row max-sm:gap-5 sm:justify-between mb-5">
             <div class="block">
                 <h3 class="font-manrope font-bold text-4xl text-gray-900 mb-1 max-sm:text-center">{userProfile.username}</h3>
-                <p class="font-normal text-base leading-7 text-gray-500  max-sm:text-center">Engineer at BB Agency Industry <br class="hidden sm:block" />New
-                    York, United States</p>
+                {/* <p class="font-normal text-base leading-7 text-gray-500  max-sm:text-center">Engineer at BB Agency Industry <br class="hidden sm:block" />New
+                    York, United States</p> */}
             </div>
 
             {userProfile._id === user?._id && (
@@ -74,6 +92,7 @@ export default function Profile() {
                 </button>
                 </Link>
                 <button
+                    onClick={handleDelete} 
                     class="py-3.5 px-5 block rounded-lg bg-red-500 items-center shadow-sm shadow-transparent transition-all duration-500 hover:bg-red-600">
                     <TiUserDelete className='text-white size-6'/> <br/>
                     <span class=" font-semibold text-base leading-7 text-white">Delete account</span>

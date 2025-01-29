@@ -71,10 +71,12 @@ router.delete("/:id", verifyTokenAndAuthorization, async (req, res) => {
         }
 
         // Delete all posts by this user
-        await Post.deleteMany({ email: user.email });
+        await Post.deleteMany({ userId: user._id });
        
         // Delete the user
         await User.findByIdAndDelete(req.params.id);
+
+        
         
         res.status(200).json("User and all their posts have been deleted...");
     } catch (error) {

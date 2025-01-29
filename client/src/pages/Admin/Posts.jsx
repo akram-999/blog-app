@@ -40,7 +40,7 @@ export default function Posts() {
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Posts Management</h1>
         <Link
-          to="/write"
+          to="/createblog"
           className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600"
         >
           Create New Post
@@ -86,7 +86,7 @@ export default function Posts() {
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900">{post.userId.username}</div>
+                  <div className="text-sm text-gray-900">{post.userId?.username}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="flex gap-1">
@@ -113,7 +113,7 @@ export default function Posts() {
                     <FiEye size={18} />
                   </Link>
                   <Link
-                    to={`/edit/${post._id}`}
+                    to={`/update-blog/${post._id}`}
                     className="text-blue-600 hover:text-blue-900 mr-4"
                   >
                     <FiEdit2 size={18} />

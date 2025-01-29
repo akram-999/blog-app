@@ -46,7 +46,14 @@ export default function BlogDetail() {
     }
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div><div class="w-full max-w-md mx-auto animate-pulse p-9">
+  <h1 class="h-2 bg-gray-300 rounded-lg w-52 dark:bg-gray-600"></h1>
+
+  <p class="w-48 h-2 mt-6 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+  <p class="w-full h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+  <p class="w-64 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+  <p class="w-4/5 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+</div></div>;
   if (error) return <div>Error: {error}</div>;
 
   return (
@@ -66,7 +73,7 @@ export default function BlogDetail() {
                   <div className="hs-tooltip [--trigger:hover] [--placement:bottom] inline-block">
                     
                       <span className="font-semibold text-gray-800 dark:text-neutral-200">
-                        {blog.userId.username}
+                        {blog.userId?.username}
                       </span>
                     
                   </div>
@@ -120,7 +127,7 @@ export default function BlogDetail() {
 
             <div className='flex flex-wrap gap-2'>
             {blog.categories.map((category) => (
-              <p className="text-lg text-green-400 ">{category}</p>
+              <p className="text-lg text-green-400 bg-green-200  px-3 rounded-full">{category}</p>
             ))}
             </div>
             
